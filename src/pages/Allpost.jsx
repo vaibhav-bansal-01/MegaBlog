@@ -5,17 +5,40 @@ import { Container, PostCard } from "../components/index.js";
 const AllPostComponent = () => {
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    appwriteService.getAllPosts([]).then((response) => {
+      console.log(response);
+      if (response) {
+        setPosts(response.documents);
+      }
+    });
+  }, []);
 
-  appwriteService.getAllPosts([]).then((posts) => setPosts(posts));
+  if (posts.length === 0) {
+    return (
+      <div className="w-full py-8 mt-4 text-cnetre">
+        <Container>
+          <div className="flex felx-wrap">
+            <div className="p-2 w-full">
+              <h1 className="text-4xl font-bold">No Posts Yet</h1>
+            </div>
+          </div>
+        </Container>
+      </div>
+    );
+  }
 
   return (
     <div className="py-8 w-full">
       <Container>
         <div className="flex flex-wrap">
           {posts.map((post) => (
-            <div className="p-2 w-1/4">
-              <PostCard post={post} />
+            <div className="p-2 w-1/4" key={post.$id}>
+              <PostCard
+                $id={post.$id}
+                title={post.title}
+                featuredImage={post.featuredImage}
+              />
             </div>
           ))}
         </div>
@@ -24,4 +47,4 @@ const AllPostComponent = () => {
   );
 };
 
-export default Allpost;
+export default AllPostComponent;

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function Header() {
   const authStatus = useSelector((state) => state.auth.status);
+  const navigate = useNavigate();
 
   const navItems = [
     {
@@ -46,7 +47,7 @@ function Header() {
           </div>
           <ul className="flex ml-auto">
             {navItems.map((item) => (
-              items.active ? (
+              item.active ? (
                 <li key={item.name}>
                   <button
                   onClick={() => navigate(item.slug)}

@@ -29,7 +29,7 @@ function Login() {
   return (
     <div className="flex items-center justify-center w-full">
       <div className="mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10">
-        <div className="mb-2 flex justify-centre">
+        <div className="mb-2 flex justify-center">
           <span className="inline-block w-full max-w-\[100px\]">
             <Logo width="100%" />
           </span>
@@ -37,8 +37,8 @@ function Login() {
         <h2 className="text-2xl font-bold text-center leading-tight">
           Sign in to your account
         </h2>
-        <p className="text-centre text-base text-black/60 mt-2">
-          Don&apose;t have an account?&nbsp;
+        <p className="text-center text-base text-black/60 mt-2">
+          Don&apos;t have an account?&nbsp;
           <Link
             to="/signup"
             className="font-medium text-primary transition-all duration-200 hover:underline"
@@ -70,7 +70,7 @@ function Login() {
                 required: true,
               })}
             ></Input>
-            <Button type="submit" className="w-full"></Button>
+            <Button type="submit" className="w-full">Login</Button>
           </div>
         </form>
       </div>

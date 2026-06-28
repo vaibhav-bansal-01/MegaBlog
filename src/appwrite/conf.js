@@ -34,21 +34,17 @@ export class Service {
   }
 
   async updatePost(slug, { title, content, featuredImage, status }) {
-    try {
-      return await this.databases.updateDocument(
-        config.appwriteDatabaseId,
-        config.appwriteCollectionId,
-        slug,
-        {
-          title,
-          content,
-          featuredImage,
-          status,
-        },
-      );
-    } catch (error) {
-      throw new Error(error.message);
-    }
+    return await this.databases.updateDocument(
+      config.appwriteDatabaseId,
+      config.appwriteCollectionId,
+      slug,
+      {
+        title,
+        content,
+        featuredImage,
+        status,
+      },
+    );
   }
 
   async deletePost(slug) {
@@ -129,7 +125,7 @@ export class Service {
   }
 
   getFilePreview(fileId) {
-    return this.bucket.getFilePreview(config.appwriteBucketId, fileId);
+    return `${config.appwriteUrl}/storage/buckets/${config.appwriteBucketId}/files/${fileId}/view?project=${config.appwriteProjectId}`;
   }
 }
 

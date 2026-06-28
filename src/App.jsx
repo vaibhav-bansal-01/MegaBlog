@@ -16,7 +16,7 @@ function App() {
       .getCurrentUser()
       .then((userData) => {
         if (userData) {
-          dispatch(login({ userData }));
+          dispatch(login(userData));
         } else {
           dispatch(logout());
         }
@@ -26,9 +26,11 @@ function App() {
 
   return !loading ? (
     <div className="min-h-screen flex flex-wrap content-between bg-gray-600">
-      <div className="w-full block">
+      <div className="min-h-screen flex flex-col bg-gray-100 w-full">
         <Header />
-        <main>{/* <Outlet /> */}</main>
+        <main className="grow">
+          <Outlet />
+        </main>
         <Footer />
       </div>
     </div>

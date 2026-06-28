@@ -14,7 +14,7 @@ function PostCard({ $id, title, featuredImage }) {
                 : "/placeholder.png"
             }
             alt={title}
-            className="rounded-xl w-full h-48 object-cover"
+            className="rounded-xl w-full h-48 object-contain"
           />
         </div>
         <h2 className="text-xl font-bold">{title}</h2>

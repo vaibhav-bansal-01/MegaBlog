@@ -4,17 +4,17 @@ import appwriteService from "../appwrite/conf.js";
 import { useParams, useNavigate } from "react-router-dom";
 
 function Editpost() {
-    const [post, setPost] = useState(null);
-    const {slug} = useParams();
-    const navigate = useNavigate();
+  const [post, setPost] = useState(null);
+  const { slug } = useParams();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        if(slug){
-            appwriteService.getPostBySlug(slug).then((post) => setPost(post))
-        } else {
-            navigate("/")
-        }
-    }, [])
+  useEffect(() => {
+    if (slug) {
+      appwriteService.getPost(slug).then((post) => setPost(post));
+    } else {
+      navigate("/");
+    }
+  }, []);
 
   return post ? (
     <div className="py-8">
@@ -22,7 +22,7 @@ function Editpost() {
         <PostForm post={post} />
       </Container>
     </div>
-  ) : null
+  ) : null;
 }
 
-export default Editpost
+export default Editpost;

@@ -32,6 +32,12 @@ export default function Post() {
     });
   };
 
+  console.log("Featured Image ID:", post?.featuredImage);
+
+  if (post) {
+    console.log(appwriteService.getFilePreview(post.featuredImage));
+  }
+
   return post ? (
     <div className="py-8">
       <Container>
