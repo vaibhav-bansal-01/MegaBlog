@@ -181,7 +181,7 @@ This project is licensed under the MIT License.
 
 GitHub: https://github.com/vaibhav-bansal-01
 
-LinkedIn: *Add your LinkedIn profile here*
+LinkedIn: https://www.linkedin.com/in/vaibhav-bansal-078502289/
 
 ---
 
