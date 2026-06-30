@@ -62,25 +62,25 @@ MegaBlog
 
 ### Home Page
 
-> Add screenshot here
+<img width="1897" height="966" alt="Screenshot 2026-07-01 010857" src="https://github.com/user-attachments/assets/5fa21f1c-cda3-4fdf-93ba-4a08581be370" />
 
 ---
 
 ### Login Page
 
-> Add screenshot here
+<img width="1890" height="965" alt="Screenshot 2026-07-01 010958" src="https://github.com/user-attachments/assets/3cb7d516-a6ab-4581-b26c-bdb203102cba" />
 
 ---
 
 ### Blog Editor
 
-> Add screenshot here
+<img width="1896" height="967" alt="Screenshot 2026-07-01 010940" src="https://github.com/user-attachments/assets/8b734957-70bd-46fd-9078-8e943e3ce1e0" />
 
 ---
 
 ### Blog Details
 
-> Add screenshot here
+<img width="1918" height="970" alt="Screenshot 2026-07-01 010926" src="https://github.com/user-attachments/assets/808d9a83-5a9f-4ed7-bc6d-88b02fe6f881" />
 
 ---
 
