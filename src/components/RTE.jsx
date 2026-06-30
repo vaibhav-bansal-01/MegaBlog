@@ -4,8 +4,10 @@ import { Controller } from "react-hook-form";
 
 export default function RTE({ name, control, label, defaultValue = "" }) {
   return (
-    <div className="w-full">
-      {label && <label className="inline-block mb-1 pl-1">{label}</label>}
+    <div className="w-full bg-white rounded-2xl shadow-lg">
+      <label className="block text-md font-semibold text-gray-700 mb-2 ml-1">
+          {label}
+        </label>
       <Controller
         name={name || "content"} //means everything in the form needs to be stored inside content or the given feild name
         control={control}
@@ -16,7 +18,7 @@ export default function RTE({ name, control, label, defaultValue = "" }) {
               apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
               value={value}
               init={{
-                height: 400,
+                height: 500,
                 menubar: true,
                 plugins: [
                   "advlist autolink lists link image charmap print preview anchor",

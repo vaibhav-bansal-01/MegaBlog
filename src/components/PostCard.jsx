@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 
 function PostCard({ $id, title, featuredImage }) {
   return (
-    <Link to={`/post/${$id}`}>
-      <div className="w-full bg-gray-100 rounded-xl p-4">
-        <div className="w-full flex justify-center mb-4">
+    <Link to={`/post/${$id}`} className="group block">
+      <div className="overflow-hidden rounded-2xl bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+        {/* Image */}
+        <div className="h-56 bg-gray-100 flex items-center justify-center overflow-hidden">
           <img
             src={
               featuredImage
@@ -14,10 +15,18 @@ function PostCard({ $id, title, featuredImage }) {
                 : "/placeholder.png"
             }
             alt={title}
-            className="rounded-xl w-full h-48 object-contain"
+            className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
           />
         </div>
-        <h2 className="text-xl font-bold">{title}</h2>
+
+        {/* Content */}
+        <div className="p-5">
+          <h2 className="text-xl font-bold text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors">
+            {title}
+          </h2>
+
+          <p className="mt-3 text-sm text-gray-500">Click to read more →</p>
+        </div>
       </div>
     </Link>
   );

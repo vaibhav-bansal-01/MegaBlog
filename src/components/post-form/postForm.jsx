@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, Select, RTE } from "../index.js";
 import appwriteService from "../../appwrite/conf.js";
@@ -36,16 +36,14 @@ function PostForm({ post }) {
           featuredImage: file ? file.$id : undefined,
         });
 
+
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
         }
       } else {
-        console.log("Uploading file...");
         const file = await appwriteService.uploadFile(data.image[0]);
-        console.log("File:", file);
 
         if (file) {
-          console.log("Creating post...");
 
           const dbPost = await appwriteService.createPost({
             ...data,
@@ -53,7 +51,6 @@ function PostForm({ post }) {
             userId: userData.$id,
           });
 
-          console.log("DB Post:", dbPost);
 
           if (dbPost) {
             navigate(`/post/${dbPost.$id}`);
@@ -87,65 +84,86 @@ function PostForm({ post }) {
     };
   }, [watch, slugTransform, setValue]);
 
+  const [preview, setPreview] = useState(
+    post ? appwriteService.getFilePreview(post.featuredImage) : null,
+  );
+
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
-      <div className="w-2/3 px-2">
-        <Input
-          label="Title :"
-          placeholder="Title"
-          className="mb-4"
-          {...register("title", { required: true })}
-        />
-        <Input
-          label="Slug :"
-          placeholder="Slug"
-          className="mb-4"
-          {...register("slug", { required: true })}
-          onInput={(e) => {
-            setValue("slug", slugTransform(e.currentTarget.value), {
-              shouldValidate: true,
-            });
-          }}
-        />
-        <RTE
-          label="Content :"
-          name="content"
-          control={control}
-          defaultValue={getValues("content")}
-        />
+    <div>
+      <div className="mb-10 ml-4">
+        <h1 className="text-4xl font-bold text-gray-900">
+          {post ? "Edit Post" : "Create New Post"}
+        </h1>
+        <p className="text-gray-500 mt-2">
+          Share your thoughts with the world.
+        </p>
       </div>
-      <div className="w-1/3 px-2">
-        <Input
-          label="Featured Image :"
-          type="file"
-          className="mb-4"
-          accept="image/png, image/jpg, image/jpeg, image/gif"
-          {...register("image", { required: !post })}
-        />
-        {post && (
-          <div className="w-full mb-4">
-            <img
-              src={appwriteService.getFilePreview(post.featuredImage)}
-              alt={post.title}
-              className="rounded-lg"
+      <div className="bg-white rounded-2xl shadow-lg p-8">
+        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
+          <div className="w-3/4 px-2">
+            <Input
+              label="Title"
+              placeholder="Title"
+              className="mb-4"
+              {...register("title", { required: true })}
+            />
+            <Input
+              label="Slug"
+              placeholder="Slug"
+              className="mb-4"
+              {...register("slug", { required: true })}
+              onInput={(e) => {
+                setValue("slug", slugTransform(e.currentTarget.value), {
+                  shouldValidate: true,
+                });
+              }}
+            />
+            <RTE
+              label="Content"
+              name="content"
+              control={control}
+              defaultValue={getValues("content")}
             />
           </div>
-        )}
-        <Select
-          options={["active", "inactive"]}
-          label="Status"
-          className="mb-4"
-          {...register("status", { required: true })}
-        />
-        <Button
-          type="submit"
-          bgColor={post ? "bg-green-500" : undefined}
-          className="w-full"
-        >
-          {post ? "Update" : "Submit"}
-        </Button>
+          <div className="w-1/4 px-2">
+            <Input
+              label="Featured Image"
+              type="file"
+              accept="image/png, image/jpg, image/jpeg, image/gif"
+              {...register("image", { required: !post })}
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (file) {
+                  setPreview(URL.createObjectURL(file));
+                }
+              }}
+            />
+            {preview && (
+              <div className="mt-5">
+                <img
+                  src={preview}
+                  alt="Preview"
+                  className="w-full h-56 rounded-xl object-contain border border-gray-300"
+                />
+              </div>
+            )}
+            <Select
+              options={["active", "inactive"]}
+              label="Status"
+              className="mb-4"
+              {...register("status", { required: true })}
+            />
+            <Button
+              type="submit"
+              bgColor={post ? "bg-green-500" : undefined}
+              className="w-full py-2 text-lg rounded-xl"
+            >
+              {post ? "Update Post" : "🚀 Publish Post"}
+            </Button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   );
 }
 

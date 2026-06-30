@@ -1,43 +1,66 @@
 import React, { useState, useEffect } from "react";
 import appwriteService from "../appwrite/conf.js";
 import { Container, PostCard } from "../components/index.js";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { Button } from "../components/index.js";
 
 function Home() {
-  const [posts, setPosts] = useState([]);
+  const authStatus = useSelector((state) => state.auth.status);
 
-  useEffect(() => {
-    appwriteService.getAllPosts([]).then((response) => {
-      if (response) {
-        setPosts(response.documents);
-      }
-    });
-  }, []);
+  return authStatus ? (
+    <div className="flex items-center justify-center min-h-[70vh]">
+      <div className="text-center">
+        <h1 className="text-7xl font-bold text-gray-800 mb-12">
+          Welcome to MegaBlog
+        </h1>
 
-  if (posts.length === 0) {
-    return (
-      <div className="w-full py-8 mt-4 text-cnetre">
-        <Container>
-          <div className="flex felx-wrap">
-            <div className="p-2 w-full">
-              <h1 className="text-4xl font-bold">No Posts Yet</h1>
-            </div>
-          </div>
-        </Container>
+        <p className="text-2xl text-gray-500 mb-12">
+          Share your stories with the world.
+          <br />
+          Your next article is just one click away.
+        </p>
+
+        <Link to="/add-post">
+          <Button className="px-8 py-3 text-2xl rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+            🚀 Create New Post
+          </Button>
+        </Link>
       </div>
-    );
-  }
+    </div>
+  ) : (
+    <div className="flex items-center justify-center min-h-[70vh]">
+      <div className="text-center max-w-8xl">
+        <div className="text-8xl mb-6">✨</div>
 
-  return (
-    <div className="py-8 w-full">
-      <Container>
-        <div className="flex flex-wrap">
-          {posts.map((post) => (
-            <div className="p-2 w-1/4" key={post.$id}>
-              <PostCard {...post} />
-            </div>
-          ))}
+        <h1 className="text-7xl font-bold text-gray-800 mb-5">
+          Welcome to MegaBlog
+        </h1>
+
+        <p className="text-xl text-gray-500 mb-10">
+          Read articles from creators around the world.
+          <br />
+          Join our community and start sharing your ideas.
+        </p>
+
+        <div className="flex justify-center gap-5">
+          <Link to="/signup">
+            <Button className="px-8 py-3 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+              Sign Up
+            </Button>
+          </Link>
+
+          <Link to="/login">
+            <Button
+              bgColor="bg-gray-100"
+              textColor="text-gray-800"
+              className="px-8 py-3 text-lg rounded-xl hover:bg-gray-200 transition-all duration-300"
+            >
+              Login
+            </Button>
+          </Link>
         </div>
-      </Container>
+      </div>
     </div>
   );
 }

@@ -28,7 +28,7 @@ function SignUp() {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10">
+      <div className="mx-auto w-full max-w-lg bg-gray-100 rounded-2xl p-10 border border-gray-200 shadow-xl">
         <div className="mb-2 flex justify-center">
           <span className="inline-block w-full max-w-\[100px\]">
             <Logo width="100%" />
@@ -50,7 +50,8 @@ function SignUp() {
         <form onSubmit={handleSubmit(create)} className="mt-8">
           <div className="space-y-5">
             <Input
-              label="Full Name: "
+              label="Full Name"
+              className="focus:ring-2 focus:ring-gray-1000 focus:border-gray-1000 transition"
               placeholder="Enter your Full Name"
               type="text"
               {...register("name", {
@@ -58,7 +59,8 @@ function SignUp() {
               })}
             ></Input>
             <Input
-              label="Email: "
+              label="Email"
+              className="focus:ring-2 focus:ring-gray-1000 focus:border-gray-1000 transition"
               placeholder="Enter your Email"
               type="email"
               {...register("email", {
@@ -71,7 +73,8 @@ function SignUp() {
               })}
             ></Input>
             <Input
-              label="Password: "
+              label="Password"
+              className="focus:ring-2 focus:ring-gray-1000 focus:border-gray-1000 transition"
               placeholder="Enter your Password"
               type="password"
               {...register("password", {
